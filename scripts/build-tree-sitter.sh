@@ -46,8 +46,8 @@ git clone https://github.com/camdencheek/tree-sitter-go-mod.git
 
 pushd tree-sitter-go-mod
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3" \
-CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13" \
 PREFIX=$TMP_BUILD_DIR/build make install
 popd
