@@ -5,6 +5,7 @@ The `tree_sitter.xcframework` binary comes with:
 - [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift)
 - [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go)
 - [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby)
+- [tree-sitter-json](https://github.com/tree-sitter/tree-sitter-json)
 
 This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1488). But, if the parser you'd like to use doesn't have a Makefile, let me know and I'll help get it set up.
 
@@ -14,7 +15,7 @@ This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.20.6")
+    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.206.0")
 ]
 ```
 

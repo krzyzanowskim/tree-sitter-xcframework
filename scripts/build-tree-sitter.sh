@@ -51,11 +51,23 @@ LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-s
 PREFIX=$TMP_BUILD_DIR/build make install
 popd
 
+git clone https://github.com/tree-sitter/tree-sitter-json.git
+
+pushd tree-sitter-json
+gh pr checkout 19
+npm install
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 -Wall -Wextra $(pkg-config tree-sitter --cflags)" \
+CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 -Wall -Wextra $(pkg-config tree-sitter --cflags)" \
+LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
+PREFIX=$TMP_BUILD_DIR/build make install
+popd
+
 libtool -static -o libtree-sitter.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-swift.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-go.a \
-    $TMP_BUILD_DIR/build/lib/libtree-sitter-ruby.a
+    $TMP_BUILD_DIR/build/lib/libtree-sitter-ruby.a \
+    $TMP_BUILD_DIR/build/lib/libtree-sitter-json.a
 
 mkdir -p tree_sitter.framework/Versions/A/{Headers,Modules,Resources}
 cp -f libtree-sitter.a tree_sitter.framework/Versions/A/tree_sitter
