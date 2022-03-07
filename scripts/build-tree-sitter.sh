@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -euxo pipefail
+
 BASE_PWD="$PWD"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 TMP_BUILD_DIR=$( mktemp -d )
@@ -40,6 +42,16 @@ LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-s
 PREFIX=$TMP_BUILD_DIR/build make install
 popd
 
+git clone https://github.com/camdencheek/tree-sitter-go-mod.git
+
+pushd tree-sitter-go-mod
+npm install
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3" \
+CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3" \
+LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13" \
+PREFIX=$TMP_BUILD_DIR/build make install
+popd
+
 git clone https://github.com/tree-sitter/tree-sitter-ruby.git
 
 pushd tree-sitter-ruby
@@ -66,6 +78,7 @@ libtool -static -o libtree-sitter.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-swift.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-go.a \
+    $TMP_BUILD_DIR/build/lib/libtree-sitter-gomod.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-ruby.a \
     $TMP_BUILD_DIR/build/lib/libtree-sitter-json.a
 

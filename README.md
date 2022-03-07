@@ -4,6 +4,7 @@ The `tree_sitter.xcframework` binary comes with:
 - [tree-sitter](https://tree-sitter.github.io/tree-sitter) runtime
 - [tree-sitter-swift](https://github.com/alex-pinkus/tree-sitter-swift)
 - [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go)
+- [tree-sitter-gomod](https://github.com/camdencheek/tree-sitter-go-mod)
 - [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby)
 - [tree-sitter-json](https://github.com/tree-sitter/tree-sitter-json)
 
