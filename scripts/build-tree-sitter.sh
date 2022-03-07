@@ -26,7 +26,7 @@ git clone https://github.com/alex-pinkus/tree-sitter-swift.git
 
 pushd tree-sitter-swift
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
@@ -36,7 +36,7 @@ git clone https://github.com/tree-sitter/tree-sitter-go.git
 
 pushd tree-sitter-go
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
@@ -46,7 +46,7 @@ git clone https://github.com/camdencheek/tree-sitter-go-mod.git
 
 pushd tree-sitter-go-mod
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
@@ -57,7 +57,7 @@ git clone https://github.com/tree-sitter/tree-sitter-ruby.git
 pushd tree-sitter-ruby
 gh pr checkout 199
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
@@ -68,7 +68,7 @@ git clone https://github.com/tree-sitter/tree-sitter-json.git
 pushd tree-sitter-json
 gh pr checkout 19
 npm install
-CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -std=gnu99 -O3 $(pkg-config tree-sitter --cflags)" \
+CFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13 $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
