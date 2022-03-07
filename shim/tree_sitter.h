@@ -2,5 +2,6 @@
 #include <tree_sitter/parser.h>
 #include <tree_sitter/tree-sitter-swift.h>
 #include <tree_sitter/go.h>
+#include <tree_sitter/gomod.h>
 #include <tree_sitter/ruby.h>
 #include <tree_sitter/tree-sitter-json.h>
