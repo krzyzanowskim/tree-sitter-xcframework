@@ -20,6 +20,27 @@ dependencies: [
 ]
 ```
 
+## Usage
+
+Accessing the parsers directly:
+
+```swift
+import tree_sitter
+
+let parser = tree_sitter_swift()
+```
+
+Via the included "LanguageResources" abstraction:
+
+```swift
+import tree_sitter_language_resources
+
+let swift = LanguageResource.swift
+
+let url = swift.highlightQueryURL
+let parserPtr = swift.parser
+```
+
 ### Suggestions or Feedback
 
 I'd love to hear from you! Get in touch via twitter [@krzyzanowskim](https://twitter.com/krzyzanowskim), an issue, or a pull request.

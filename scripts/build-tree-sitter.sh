@@ -11,6 +11,7 @@ PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/lib/pkgconfig"
 export PKG_CONFIG_PATH=${PKG_CONFIG_PATH:+:}${PKG_CONFIG_PATH}:$(pkg-config --variable pc_path pkg-config)
 
 COMMON_FLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13"
+LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/tree_sitter_language_resources/LanguageResources"
 
 pushd $TMP_BUILD_DIR
 
@@ -32,6 +33,8 @@ CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
+mkdir -p "$LANGUAGE_DATA_DIR/swift"
+cp queries/* "$LANGUAGE_DATA_DIR/swift/"
 popd
 
 git clone https://github.com/tree-sitter/tree-sitter-go.git
@@ -42,6 +45,8 @@ CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
+mkdir -p "$LANGUAGE_DATA_DIR/go"
+cp queries/* "$LANGUAGE_DATA_DIR/go/"
 popd
 
 git clone https://github.com/camdencheek/tree-sitter-go-mod.git
@@ -52,6 +57,8 @@ CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
+mkdir -p "$LANGUAGE_DATA_DIR/gomod"
+cp queries/* "$LANGUAGE_DATA_DIR/gomod/"
 popd
 
 git clone https://github.com/tree-sitter/tree-sitter-ruby.git
@@ -63,6 +70,8 @@ CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
+mkdir -p "$LANGUAGE_DATA_DIR/ruby"
+cp queries/* "$LANGUAGE_DATA_DIR/ruby/"
 popd
 
 git clone https://github.com/tree-sitter/tree-sitter-json.git
@@ -74,6 +83,8 @@ CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
 PREFIX=$TMP_BUILD_DIR/build make install
+mkdir -p "$LANGUAGE_DATA_DIR/json"
+cp queries/* "$LANGUAGE_DATA_DIR/json/"
 popd
 
 libtool -static -o libtree-sitter.a \
