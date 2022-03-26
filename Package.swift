@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "tree-sitter-xcframework",
-    platforms: [.macOS(.v10_13)],
+    platforms: [.macOS(.v10_13), .iOS(.v11)],
     products: [
         .library(
             name: "tree_sitter",
@@ -21,7 +21,8 @@ let package = Package(
             dependencies: ["tree_sitter"],
             resources: [
                 .copy("LanguageResources")
-            ]
+            ],
+            linkerSettings: [.linkedLibrary("c++")]
         )
     ]
 )
