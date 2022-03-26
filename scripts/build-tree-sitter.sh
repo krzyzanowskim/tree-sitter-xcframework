@@ -40,7 +40,6 @@ popd
 git clone https://github.com/tree-sitter/tree-sitter-go.git
 
 pushd tree-sitter-go
-npm install
 CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
@@ -52,7 +51,6 @@ popd
 git clone https://github.com/camdencheek/tree-sitter-go-mod.git
 
 pushd tree-sitter-go-mod
-npm install
 CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
@@ -65,7 +63,6 @@ git clone https://github.com/tree-sitter/tree-sitter-ruby.git
 
 pushd tree-sitter-ruby
 gh pr checkout 199
-npm install
 CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
@@ -78,7 +75,6 @@ git clone https://github.com/tree-sitter/tree-sitter-json.git
 
 pushd tree-sitter-json
 gh pr checkout 19
-npm install
 CFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 CXXFLAGS="${COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
 LDFLAGS="${COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
