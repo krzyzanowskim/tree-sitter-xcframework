@@ -3,7 +3,6 @@
 
 ; Identifiers
 (attribute) @variable
-(simple_identifier) @variable
 (type_identifier) @type
 (self_expression) @variable.builtin
 
@@ -28,6 +27,7 @@
 (type_parameter (type_identifier) @parameter)
 (inheritance_constraint (identifier (simple_identifier) @parameter))
 (equality_constraint (identifier (simple_identifier) @parameter))
+(non_binding_pattern bound_identifier: (simple_identifier)) @variable
 
 [
   "typealias"
@@ -37,6 +37,7 @@
   "protocol"
   "extension"
   "indirect"
+  "some"
 ] @keyword
 
 [
