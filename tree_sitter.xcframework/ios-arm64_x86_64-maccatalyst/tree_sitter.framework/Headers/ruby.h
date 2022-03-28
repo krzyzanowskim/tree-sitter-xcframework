@@ -13,4 +13,4 @@ extern TSLanguage *tree_sitter_ruby();
 }
 #endif
 
-#endif  // TREE_SITTER_RUBY_H_
+#endif // TREE_SITTER_RUBY_H_
