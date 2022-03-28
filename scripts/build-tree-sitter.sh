@@ -105,9 +105,6 @@ mv tree-sitter-go-mod tree-sitter-gomod
 build_parser "gomod"
 
 git clone https://github.com/tree-sitter/tree-sitter-ruby.git
-pushd tree-sitter-ruby
-gh pr checkout 199
-popd
 build_parser "ruby"
 
 git clone https://github.com/tree-sitter/tree-sitter-json.git
