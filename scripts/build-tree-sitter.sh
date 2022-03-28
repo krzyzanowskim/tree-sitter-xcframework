@@ -7,13 +7,14 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/tree_sitter_language_resources/LanguageResources"
 
 TMP_BUILD_DIR=$( mktemp -d )
-mkdir -p $TMP_BUILD_DIR/build/{macos,iphoneos,iphonesimulator}
+mkdir -p $TMP_BUILD_DIR/build/{macos,iphoneos,maccatalyst,iphonesimulator}
 
 IPHONEOS_SYSROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 IPHONESIMULATOR_SYSROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
 MACOS_COMMON_FLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13"
 IPHONEOS_COMMON_FLAGS="-arch arm64 -miphoneos-version-min=11.0 -fembed-bitcode -isysroot $IPHONEOS_SYSROOT"
+MACCATALYST_COMMON_FLAGS="-arch arm64 -arch x86_64 -target x86_64-apple-ios-macabi -fembed-bitcode -miphoneos-version-min=13.0"
 IPHONESIMULATOR_COMMON_FLAGS="-arch arm64 -arch x86_64 -miphonesimulator-version-min=11.0 -isysroot $IPHONESIMULATOR_SYSROOT"
 
 pushd $TMP_BUILD_DIR
@@ -37,6 +38,15 @@ function build_parser () {
     CXXFLAGS="${IPHONEOS_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     LDFLAGS="${IPHONEOS_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
     PREFIX=$TMP_BUILD_DIR/build/iphoneos make install
+    make clean
+
+    PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/maccatalyst/lib/pkgconfig"
+    export PKG_CONFIG_PATH=${PKG_CONFIG_PATH:+:}${PKG_CONFIG_PATH}:$(pkg-config --variable pc_path pkg-config)
+
+    CFLAGS="${MACCATALYST_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
+    CXXFLAGS="${MACCATALYST_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
+    LDFLAGS="${MACCATALYST_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
+    PREFIX=$TMP_BUILD_DIR/build/maccatalyst make install
     make clean
 
     PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/iphonesimulator/lib/pkgconfig"
@@ -67,6 +77,12 @@ CFLAGS="${IPHONEOS_COMMON_FLAGS} -std=gnu99 -O3 -Wall -Wextra" \
 CXXFLAGS="${IPHONEOS_COMMON_FLAGS} -O3 -Wall -Wextra" \
 LDFLAGS="${IPHONEOS_COMMON_FLAGS}" \
 PREFIX=$TMP_BUILD_DIR/build/iphoneos make install
+make clean
+
+CFLAGS="${MACCATALYST_COMMON_FLAGS} -std=gnu99 -O3 -Wall -Wextra" \
+CXXFLAGS="${MACCATALYST_COMMON_FLAGS} -O3 -Wall -Wextra" \
+LDFLAGS="${MACCATALYST_COMMON_FLAGS}" \
+PREFIX=$TMP_BUILD_DIR/build/maccatalyst make install
 make clean
 
 CFLAGS="${IPHONESIMULATOR_COMMON_FLAGS} -std=gnu99 -O3 -Wall -Wextra" \
@@ -151,6 +167,25 @@ cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Modules
 
 popd
 
+pushd $TMP_BUILD_DIR/build/maccatalyst
+
+libtool -static -o libtree-sitter.a \
+    lib/libtree-sitter.a \
+    lib/libtree-sitter-swift.a \
+    lib/libtree-sitter-go.a \
+    lib/libtree-sitter-gomod.a \
+    lib/libtree-sitter-ruby.a \
+    lib/libtree-sitter-json.a
+
+mkdir -p tree_sitter.framework/{Headers,Modules}
+cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
+cp include/tree_sitter/*.h tree_sitter.framework/Headers
+cp $SCRIPT_DIR/../shim/tree_sitter.h tree_sitter.framework/Headers
+cp $SCRIPT_DIR/../shim/iphoneos-Info.plist tree_sitter.framework/Info.plist
+cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Modules
+
+popd
+
 pushd $TMP_BUILD_DIR/build/iphonesimulator
 
 libtool -static -o libtree-sitter.a \
@@ -175,6 +210,7 @@ rm -rf $SCRIPT_DIR/../tree_sitter.xcframework
 xcodebuild -create-xcframework \
     -framework $TMP_BUILD_DIR/build/macos/tree_sitter.framework \
     -framework $TMP_BUILD_DIR/build/iphoneos/tree_sitter.framework \
+    -framework $TMP_BUILD_DIR/build/maccatalyst/tree_sitter.framework \
     -framework $TMP_BUILD_DIR/build/iphonesimulator/tree_sitter.framework \
     -output $SCRIPT_DIR/../tree_sitter.xcframework
 
