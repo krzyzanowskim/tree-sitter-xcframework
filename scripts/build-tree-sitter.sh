@@ -28,7 +28,7 @@ function build_parser () {
     CFLAGS="${MACOS_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     CXXFLAGS="${MACOS_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     LDFLAGS="${MACOS_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
-    PREFIX=$TMP_BUILD_DIR/build/macos make install
+    PREFIX=$TMP_BUILD_DIR/build/macos PARSER_NAME=$1 make install
     make clean
 
     PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/iphoneos/lib/pkgconfig"
@@ -37,7 +37,7 @@ function build_parser () {
     CFLAGS="${IPHONEOS_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     CXXFLAGS="${IPHONEOS_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     LDFLAGS="${IPHONEOS_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
-    PREFIX=$TMP_BUILD_DIR/build/iphoneos make install
+    PREFIX=$TMP_BUILD_DIR/build/iphoneos PARSER_NAME=$1 make install
     make clean
 
     PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/maccatalyst/lib/pkgconfig"
@@ -46,7 +46,7 @@ function build_parser () {
     CFLAGS="${MACCATALYST_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     CXXFLAGS="${MACCATALYST_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     LDFLAGS="${MACCATALYST_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
-    PREFIX=$TMP_BUILD_DIR/build/maccatalyst make install
+    PREFIX=$TMP_BUILD_DIR/build/maccatalyst PARSER_NAME=$1 make install
     make clean
 
     PKG_CONFIG_PATH="$TMP_BUILD_DIR/build/iphonesimulator/lib/pkgconfig"
@@ -55,7 +55,7 @@ function build_parser () {
     CFLAGS="${IPHONESIMULATOR_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     CXXFLAGS="${IPHONESIMULATOR_COMMON_FLAGS} -O3 $(pkg-config tree-sitter --cflags)" \
     LDFLAGS="${IPHONESIMULATOR_COMMON_FLAGS} $(pkg-config tree-sitter --libs)" \
-    PREFIX=$TMP_BUILD_DIR/build/iphonesimulator make install
+    PREFIX=$TMP_BUILD_DIR/build/iphonesimulator PARSER_NAME=$1 make install
 
     mkdir -p "$LANGUAGE_DATA_DIR/$1"
     cp queries/* "$LANGUAGE_DATA_DIR/$1/"
@@ -63,7 +63,7 @@ function build_parser () {
     popd
 }
 
-git clone https://github.com/tree-sitter/tree-sitter.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter.git
 
 pushd tree-sitter
 git checkout v0.20.6
@@ -91,23 +91,23 @@ LDFLAGS="${IPHONESIMULATOR_COMMON_FLAGS}" \
 PREFIX=$TMP_BUILD_DIR/build/iphonesimulator make install
 popd
 
-git clone https://github.com/alex-pinkus/tree-sitter-swift.git
+git clone --depth 1 https://github.com/alex-pinkus/tree-sitter-swift.git
 pushd tree-sitter-swift
 npm install
 popd
 build_parser "swift"
 
-git clone https://github.com/tree-sitter/tree-sitter-go.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-go.git
 build_parser "go"
 
-git clone https://github.com/camdencheek/tree-sitter-go-mod.git
+git clone --depth 1 https://github.com/camdencheek/tree-sitter-go-mod.git
 mv tree-sitter-go-mod tree-sitter-gomod
 build_parser "gomod"
 
-git clone https://github.com/tree-sitter/tree-sitter-ruby.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-ruby.git
 build_parser "ruby"
 
-git clone https://github.com/tree-sitter/tree-sitter-json.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-json.git
 pushd tree-sitter-json
 gh pr checkout 19
 popd
