@@ -63,7 +63,7 @@ function build_parser () {
     popd
 }
 
-git clone https://github.com/tree-sitter/tree-sitter.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter.git
 
 pushd tree-sitter
 git checkout v0.20.6
@@ -91,23 +91,23 @@ LDFLAGS="${IPHONESIMULATOR_COMMON_FLAGS}" \
 PREFIX=$TMP_BUILD_DIR/build/iphonesimulator make install
 popd
 
-git clone https://github.com/alex-pinkus/tree-sitter-swift.git
+git clone --depth 1 https://github.com/alex-pinkus/tree-sitter-swift.git
 pushd tree-sitter-swift
 npm install
 popd
 build_parser "swift"
 
-git clone https://github.com/tree-sitter/tree-sitter-go.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-go.git
 build_parser "go"
 
-git clone https://github.com/camdencheek/tree-sitter-go-mod.git
+git clone --depth 1 https://github.com/camdencheek/tree-sitter-go-mod.git
 mv tree-sitter-go-mod tree-sitter-gomod
 build_parser "gomod"
 
-git clone https://github.com/tree-sitter/tree-sitter-ruby.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-ruby.git
 build_parser "ruby"
 
-git clone https://github.com/tree-sitter/tree-sitter-json.git
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-json.git
 pushd tree-sitter-json
 gh pr checkout 19
 popd
