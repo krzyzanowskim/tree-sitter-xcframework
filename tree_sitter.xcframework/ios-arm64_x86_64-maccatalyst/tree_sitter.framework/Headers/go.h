@@ -13,4 +13,4 @@ extern TSLanguage *tree_sitter_go();
 }
 #endif
 
-#endif  // TREE_SITTER_GO_H_
+#endif // TREE_SITTER_GO_H_

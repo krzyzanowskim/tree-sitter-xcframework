@@ -113,6 +113,12 @@ gh pr checkout 19
 popd
 build_parser "json"
 
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-php.git
+pushd tree-sitter-php
+gh pr checkout 127
+popd
+build_parser "php"
+
 # now, build the frameworks
 
 pushd $TMP_BUILD_DIR/build/macos
@@ -123,7 +129,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-go.a \
     lib/libtree-sitter-gomod.a \
     lib/libtree-sitter-ruby.a \
-    lib/libtree-sitter-json.a
+    lib/libtree-sitter-json.a \
+    lib/libtree-sitter-php.a \
 
 mkdir -p tree_sitter.framework/Versions/A/{Headers,Modules,Resources}
 cp -f libtree-sitter.a tree_sitter.framework/Versions/A/tree_sitter
@@ -153,7 +160,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-go.a \
     lib/libtree-sitter-gomod.a \
     lib/libtree-sitter-ruby.a \
-    lib/libtree-sitter-json.a
+    lib/libtree-sitter-json.a \
+    lib/libtree-sitter-php.a \
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
@@ -172,7 +180,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-go.a \
     lib/libtree-sitter-gomod.a \
     lib/libtree-sitter-ruby.a \
-    lib/libtree-sitter-json.a
+    lib/libtree-sitter-json.a \
+    lib/libtree-sitter-php.a \
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
@@ -191,7 +200,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-go.a \
     lib/libtree-sitter-gomod.a \
     lib/libtree-sitter-ruby.a \
-    lib/libtree-sitter-json.a
+    lib/libtree-sitter-json.a \
+    lib/libtree-sitter-php.a \
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter

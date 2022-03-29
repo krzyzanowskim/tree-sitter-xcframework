@@ -5,6 +5,7 @@ public enum LanguageResource: CaseIterable, Hashable {
     case go
     case gomod
     case json
+    case php
     case ruby
     case swift
 
@@ -16,6 +17,8 @@ public enum LanguageResource: CaseIterable, Hashable {
             return "gomod"
         case .json:
             return "json"
+        case .php:
+            return "php"
         case .ruby:
             return "ruby"
         case .swift:
@@ -31,6 +34,8 @@ public enum LanguageResource: CaseIterable, Hashable {
             return tree_sitter_gomod()
         case .json:
             return tree_sitter_json()
+        case .php:
+            return tree_sitter_php()
         case .ruby:
             return tree_sitter_ruby()
         case .swift:
