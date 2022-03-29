@@ -5,3 +5,4 @@
 #include <tree_sitter/gomod.h>
 #include <tree_sitter/ruby.h>
 #include <tree_sitter/tree-sitter-json.h>
+#include <tree_sitter/php.h>
