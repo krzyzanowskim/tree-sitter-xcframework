@@ -63,7 +63,7 @@ function build_parser () {
     popd
 }
 
-git clone --depth 1 https://github.com/tree-sitter/tree-sitter.git
+git clone https://github.com/tree-sitter/tree-sitter.git
 
 pushd tree-sitter
 git checkout v0.20.6
