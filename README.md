@@ -8,6 +8,8 @@ The `tree_sitter.xcframework` binary comes with:
 - [tree-sitter-ruby](https://github.com/tree-sitter/tree-sitter-ruby)
 - [tree-sitter-json](https://github.com/tree-sitter/tree-sitter-json)
 - [tree-sitter-php](https://github.com/tree-sitter/tree-sitter-php)
+- [tree-sitter-markdown](https://github.com/ikatyang/tree-sitter-markdown)
+- [tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java)
 
 This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1488). But, if the parser you'd like to use doesn't have a Makefile, let me know and I'll help get it set up.
 

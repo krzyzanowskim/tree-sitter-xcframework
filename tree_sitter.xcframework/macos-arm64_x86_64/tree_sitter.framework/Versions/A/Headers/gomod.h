@@ -13,4 +13,4 @@ extern TSLanguage *tree_sitter_gomod();
 }
 #endif
 
-#endif  // TREE_SITTER_GOMOD_H_
+#endif // TREE_SITTER_GOMOD_H_

@@ -58,7 +58,9 @@ function build_parser () {
     PREFIX=$TMP_BUILD_DIR/build/iphonesimulator make install
 
     mkdir -p "$LANGUAGE_DATA_DIR/$1"
-    cp queries/* "$LANGUAGE_DATA_DIR/$1/"
+    if [ -d "queries" ]; then
+        cp queries/* "$LANGUAGE_DATA_DIR/$1/"
+    fi
 
     popd
 }
@@ -115,9 +117,19 @@ build_parser "json"
 
 git clone --depth 1 https://github.com/tree-sitter/tree-sitter-php.git
 pushd tree-sitter-php
-gh pr checkout 127
 popd
 build_parser "php"
+
+git clone --depth 1 https://github.com/ikatyang/tree-sitter-markdown.git
+pushd tree-sitter-markdown
+gh pr checkout 42
+popd
+build_parser "markdown"
+
+git clone --depth 1 https://github.com/tree-sitter/tree-sitter-java.git
+pushd tree-sitter-java
+popd
+build_parser "java"
 
 # now, build the frameworks
 
@@ -131,6 +143,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-ruby.a \
     lib/libtree-sitter-json.a \
     lib/libtree-sitter-php.a \
+    lib/libtree-sitter-markdown.a \
+    lib/libtree-sitter-java.a \
 
 mkdir -p tree_sitter.framework/Versions/A/{Headers,Modules,Resources}
 cp -f libtree-sitter.a tree_sitter.framework/Versions/A/tree_sitter
@@ -162,6 +176,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-ruby.a \
     lib/libtree-sitter-json.a \
     lib/libtree-sitter-php.a \
+    lib/libtree-sitter-markdown.a \
+    lib/libtree-sitter-java.a
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
@@ -182,6 +198,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-ruby.a \
     lib/libtree-sitter-json.a \
     lib/libtree-sitter-php.a \
+    lib/libtree-sitter-markdown.a \
+    lib/libtree-sitter-java.a
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
@@ -202,6 +220,8 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-ruby.a \
     lib/libtree-sitter-json.a \
     lib/libtree-sitter-php.a \
+    lib/libtree-sitter-markdown.a \
+    lib/libtree-sitter-java.a
 
 mkdir -p tree_sitter.framework/{Headers,Modules}
 cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
