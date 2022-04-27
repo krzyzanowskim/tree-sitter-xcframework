@@ -144,7 +144,7 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-json.a \
     lib/libtree-sitter-php.a \
     lib/libtree-sitter-markdown.a \
-    lib/libtree-sitter-java.a \
+    lib/libtree-sitter-java.a
 
 mkdir -p tree_sitter.framework/Versions/A/{Headers,Modules,Resources}
 cp -f libtree-sitter.a tree_sitter.framework/Versions/A/tree_sitter
