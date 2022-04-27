@@ -4,7 +4,9 @@ import tree_sitter
 public enum LanguageResource: CaseIterable, Hashable {
     case go
     case gomod
+    case java
     case json
+    case markdown
     case php
     case ruby
     case swift
@@ -15,8 +17,12 @@ public enum LanguageResource: CaseIterable, Hashable {
             return "go"
         case .gomod:
             return "gomod"
+        case .java:
+            return "java"
         case .json:
             return "json"
+        case .markdown:
+            return "markdown"
         case .php:
             return "php"
         case .ruby:
@@ -32,8 +38,12 @@ public enum LanguageResource: CaseIterable, Hashable {
             return tree_sitter_go()
         case .gomod:
             return tree_sitter_gomod()
+        case .java:
+            return tree_sitter_java()
         case .json:
             return tree_sitter_json()
+        case .markdown:
+            return tree_sitter_markdown()
         case .php:
             return tree_sitter_php()
         case .ruby:
