@@ -8,6 +8,7 @@ public enum LanguageResource: CaseIterable, Hashable {
     case json
     case markdown
     case php
+    case python
     case ruby
     case swift
 
@@ -25,6 +26,8 @@ public enum LanguageResource: CaseIterable, Hashable {
             return "markdown"
         case .php:
             return "php"
+        case .python:
+            return "python"
         case .ruby:
             return "ruby"
         case .swift:
@@ -46,6 +49,8 @@ public enum LanguageResource: CaseIterable, Hashable {
             return tree_sitter_markdown()
         case .php:
             return tree_sitter_php()
+        case .python:
+            return tree_sitter_python()
         case .ruby:
             return tree_sitter_ruby()
         case .swift:

@@ -8,3 +8,4 @@
 #include <tree_sitter/tree-sitter-json.h>
 #include <tree_sitter/markdown.h>
 #include <tree_sitter/php.h>
+#include <tree_sitter/python.h>
