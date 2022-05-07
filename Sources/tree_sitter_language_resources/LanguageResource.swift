@@ -2,6 +2,7 @@ import Foundation
 import tree_sitter
 
 public enum LanguageResource: CaseIterable, Hashable {
+    case css
     case go
     case gomod
     case html
@@ -15,6 +16,8 @@ public enum LanguageResource: CaseIterable, Hashable {
 
     var queryDirectoryName: String {
         switch self {
+        case .css:
+            return "css"
         case .go:
             return "go"
         case .gomod:
@@ -40,6 +43,8 @@ public enum LanguageResource: CaseIterable, Hashable {
 
     public var parser: UnsafeMutablePointer<TSLanguage> {
         switch self {
+        case .css:
+            return tree_sitter_css()
         case .go:
             return tree_sitter_go()
         case .gomod:
