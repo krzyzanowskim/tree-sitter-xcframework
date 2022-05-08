@@ -12,6 +12,7 @@ The `tree_sitter.xcframework` binary comes with:
 - [tree-sitter-java](https://github.com/tree-sitter/tree-sitter-java)
 - [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python)
 - [tree-sitter-html](https://github.com/tree-sitter/tree-sitter-html)
+- [tree-sitter-css](https://github.com/tree-sitter/tree-sitter-css)
 
 This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1488). But, if the parser you'd like to use doesn't have a Makefile, let me know and I'll help get it set up.
 
