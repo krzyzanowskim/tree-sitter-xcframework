@@ -14,7 +14,7 @@ IPHONESIMULATOR_SYSROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
 MACOS_COMMON_FLAGS="-arch arm64 -arch x86_64 -mmacosx-version-min=10.13"
 IPHONEOS_COMMON_FLAGS="-arch arm64 -miphoneos-version-min=11.0 -fembed-bitcode -isysroot $IPHONEOS_SYSROOT"
-MACCATALYST_COMMON_FLAGS="-arch arm64 -arch x86_64 -target x86_64-apple-ios-macabi -fembed-bitcode -miphoneos-version-min=13.0"
+MACCATALYST_COMMON_FLAGS="-arch arm64 -arch x86_64 -target x86_64-apple-ios-macabi -fembed-bitcode -miphoneos-version-min=14.0"
 IPHONESIMULATOR_COMMON_FLAGS="-arch arm64 -arch x86_64 -miphonesimulator-version-min=11.0 -isysroot $IPHONESIMULATOR_SYSROOT"
 
 pushd $TMP_BUILD_DIR
@@ -139,7 +139,6 @@ build_parser "python"
 
 git clone --depth 1 https://github.com/tree-sitter/tree-sitter-html.git
 pushd tree-sitter-html
-gh pr checkout 38
 popd
 build_parser "html"
 
