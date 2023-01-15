@@ -21,6 +21,7 @@
 (function_declaration ["init" @constructor])
 (throws) @keyword
 "async" @keyword
+"await" @keyword
 (where_keyword) @keyword
 (parameter external_name: (simple_identifier) @parameter)
 (parameter name: (simple_identifier) @parameter)
@@ -33,10 +34,15 @@
   "typealias"
   "struct"
   "class"
+  "actor"
   "enum"
   "protocol"
   "extension"
   "indirect"
+  "nonisolated"
+  "override"
+  "convenience"
+  "required"
   "some"
 ] @keyword
 
@@ -54,10 +60,10 @@
 (enum_entry ["case" @keyword])
 
 ; Function calls
-(call_expression (simple_identifier) @function) ; foo()
+(call_expression (simple_identifier) @function.call) ; foo()
 (call_expression ; foo.bar.baz(): highlight the baz()
   (navigation_expression
-    (navigation_suffix (simple_identifier) @function)))
+    (navigation_suffix (simple_identifier) @function.call)))
 ((navigation_expression
    (simple_identifier) @type) ; SomeType.method(): highlight SomeType as a type
    (#match? @type "^[A-Z]"))
@@ -68,7 +74,7 @@
 ; Statements
 (for_statement ["for" @repeat])
 (for_statement ["in" @repeat])
-(for_statement item: (simple_identifier) @variable)
+(for_statement (pattern) @variable)
 (else) @keyword
 (as_operator) @keyword
 
@@ -91,8 +97,10 @@
 (statement_label) @label
 
 ; Comments
-(comment) @comment
-(multiline_comment) @comment
+[
+ (comment)
+ (multiline_comment)
+] @comment @spell
 
 ; String literals
 (line_str_text) @string
@@ -116,6 +124,9 @@
 (real_literal) @float
 (boolean_literal) @boolean
 "nil" @variable.builtin
+
+; Regex literals
+(regex_literal) @string.regex
 
 ; Operators
 (custom_operator) @operator
