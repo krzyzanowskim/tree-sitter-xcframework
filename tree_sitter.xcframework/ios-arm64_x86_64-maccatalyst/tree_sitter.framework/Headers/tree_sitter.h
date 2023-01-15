@@ -7,7 +7,7 @@
 #include <tree_sitter/html.h>
 #include <tree_sitter/ruby.h>
 #include <tree_sitter/java.h>
-#include <tree_sitter/tree-sitter-json.h>
+#include <tree_sitter/json.h>
 #include <tree_sitter/markdown.h>
 #include <tree_sitter/php.h>
 #include <tree_sitter/python.h>
