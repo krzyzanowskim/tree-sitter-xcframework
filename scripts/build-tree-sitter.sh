@@ -68,7 +68,7 @@ function build_parser () {
 git clone https://github.com/tree-sitter/tree-sitter.git
 
 pushd tree-sitter
-git checkout v0.20.7
+git checkout v0.20.8
 CFLAGS="${MACOS_COMMON_FLAGS} -std=gnu99 -O3 -Wall -Wextra" \
 CXXFLAGS="${MACOS_COMMON_FLAGS} -O3 -Wall -Wextra" \
 LDFLAGS="${MACOS_COMMON_FLAGS}" \
@@ -132,7 +132,7 @@ build_parser "java"
 
 git clone --depth 1 https://github.com/tree-sitter/tree-sitter-python.git
 pushd tree-sitter-python
-gh pr checkout 165
+gh pr checkout 162
 popd
 build_parser "python"
 
