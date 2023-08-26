@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>tree_sitter</string>
+	<string>TreeSitter</string>
 	<key>CFBundleIdentifier</key>
 	<string>best.swift.TreeSitter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
