@@ -1,6 +1,0 @@
-framework module tree_sitter {
-	umbrella header "tree_sitter.h"
-	
-	export *
-	module * { export * }
-}

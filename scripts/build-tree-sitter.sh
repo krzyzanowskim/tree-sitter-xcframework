@@ -6,6 +6,8 @@ BASE_PWD="$PWD"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/tree_sitter_language_resources/LanguageResources"
 
+FRAMEWORK_NAME="TreeSitter"
+
 TMP_BUILD_DIR=$( mktemp -d )
 mkdir -p $TMP_BUILD_DIR/build/{macos,iphoneos,maccatalyst,iphonesimulator}
 
@@ -165,22 +167,24 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-html.a \
     lib/libtree-sitter-css.a
 
-mkdir -p tree_sitter.framework/Versions/A/{Headers,Modules,Resources}
-cp -f libtree-sitter.a tree_sitter.framework/Versions/A/tree_sitter
-cp include/tree_sitter/*.h tree_sitter.framework/Versions/A/Headers
-cp $SCRIPT_DIR/../shim/tree_sitter.h tree_sitter.framework/Versions/A/Headers
-cp $SCRIPT_DIR/../shim/macos-Info.plist tree_sitter.framework/Versions/A/Resources/Info.plist
-cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Versions/A/Modules
+mkdir -p $FRAMEWORK_NAME.framework/Versions/A/{Headers/tree_sitter,Modules,Resources}
+cp -f libtree-sitter.a $FRAMEWORK_NAME.framework/Versions/A/$FRAMEWORK_NAME
+cp include/tree_sitter/*.h $FRAMEWORK_NAME.framework/Versions/A/Headers
+find $FRAMEWORK_NAME.framework/Versions/A/Headers -type f -name "*.h" | xargs sed -i '' '/^#include/s/[<>]/"/g'
+mv $FRAMEWORK_NAME.framework/Versions/A/Headers/{parser.h,api.h} $FRAMEWORK_NAME.framework/Versions/A/Headers/tree_sitter
+cp $SCRIPT_DIR/../shim/macos-Info.plist $FRAMEWORK_NAME.framework/Versions/A/Resources/Info.plist
+cp $SCRIPT_DIR/../shim/module.modulemap $FRAMEWORK_NAME.framework/Versions/A/Modules
 
-pushd tree_sitter.framework/Versions
+
+pushd $FRAMEWORK_NAME.framework/Versions
 ln -s A Current
 popd
 
-pushd tree_sitter.framework
+pushd $FRAMEWORK_NAME.framework
 ln -s Versions/Current/Headers Headers
 ln -s Versions/Current/Modules Modules
 ln -s Versions/Current/Resources Resources
-ln -s Versions/Current/tree_sitter tree_sitter
+ln -s Versions/Current/$FRAMEWORK_NAME $FRAMEWORK_NAME
 popd
 
 popd
@@ -201,12 +205,13 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-html.a \
     lib/libtree-sitter-css.a
 
-mkdir -p tree_sitter.framework/{Headers,Modules}
-cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
-cp include/tree_sitter/*.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/tree_sitter.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/iphoneos-Info.plist tree_sitter.framework/Info.plist
-cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Modules
+mkdir -p $FRAMEWORK_NAME.framework/{Headers/tree_sitter,Modules}
+cp -f libtree-sitter.a $FRAMEWORK_NAME.framework/$FRAMEWORK_NAME
+cp include/tree_sitter/*.h $FRAMEWORK_NAME.framework/Headers
+find $FRAMEWORK_NAME.framework/Headers -type f -name "*.h" | xargs sed -i '' '/^#include/s/[<>]/"/g'
+mv $FRAMEWORK_NAME.framework/Headers/{parser.h,api.h} $FRAMEWORK_NAME.framework/Headers/tree_sitter
+cp $SCRIPT_DIR/../shim/iphoneos-Info.plist $FRAMEWORK_NAME.framework/Info.plist
+cp $SCRIPT_DIR/../shim/module.modulemap $FRAMEWORK_NAME.framework/Modules
 
 popd
 
@@ -226,12 +231,13 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-html.a \
     lib/libtree-sitter-css.a
 
-mkdir -p tree_sitter.framework/{Headers,Modules}
-cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
-cp include/tree_sitter/*.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/tree_sitter.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/iphoneos-Info.plist tree_sitter.framework/Info.plist
-cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Modules
+mkdir -p $FRAMEWORK_NAME.framework/{Headers/tree_sitter,Modules}
+cp -f libtree-sitter.a $FRAMEWORK_NAME.framework/$FRAMEWORK_NAME
+cp include/tree_sitter/*.h $FRAMEWORK_NAME.framework/Headers
+find $FRAMEWORK_NAME.framework/Headers -type f -name "*.h" | xargs sed -i '' '/^#include/s/[<>]/"/g'
+mv $FRAMEWORK_NAME.framework/Headers/{parser.h,api.h} $FRAMEWORK_NAME.framework/Headers/tree_sitter
+cp $SCRIPT_DIR/../shim/iphoneos-Info.plist $FRAMEWORK_NAME.framework/Info.plist
+cp $SCRIPT_DIR/../shim/module.modulemap $FRAMEWORK_NAME.framework/Modules
 
 popd
 
@@ -251,22 +257,23 @@ libtool -static -o libtree-sitter.a \
     lib/libtree-sitter-html.a \
     lib/libtree-sitter-css.a
 
-mkdir -p tree_sitter.framework/{Headers,Modules}
-cp -f libtree-sitter.a tree_sitter.framework/tree_sitter
-cp include/tree_sitter/*.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/tree_sitter.h tree_sitter.framework/Headers
-cp $SCRIPT_DIR/../shim/iphonesimulator-Info.plist tree_sitter.framework/Info.plist
-cp $SCRIPT_DIR/../shim/module.modulemap tree_sitter.framework/Modules
+mkdir -p $FRAMEWORK_NAME.framework/{Headers/tree_sitter,Modules}
+cp -f libtree-sitter.a $FRAMEWORK_NAME.framework/$FRAMEWORK_NAME
+cp include/tree_sitter/*.h $FRAMEWORK_NAME.framework/Headers
+find $FRAMEWORK_NAME.framework/Headers -type f -name "*.h" | xargs sed -i '' '/^#include/s/[<>]/"/g'
+mv $FRAMEWORK_NAME.framework/Headers/{parser.h,api.h} $FRAMEWORK_NAME.framework/Headers/tree_sitter
+cp $SCRIPT_DIR/../shim/iphonesimulator-Info.plist $FRAMEWORK_NAME.framework/Info.plist
+cp $SCRIPT_DIR/../shim/module.modulemap $FRAMEWORK_NAME.framework/Modules
 
 popd
 
-rm -rf $SCRIPT_DIR/../tree_sitter.xcframework
+rm -rf $SCRIPT_DIR/../$FRAMEWORK_NAME.xcframework
 
 xcodebuild -create-xcframework \
-    -framework $TMP_BUILD_DIR/build/macos/tree_sitter.framework \
-    -framework $TMP_BUILD_DIR/build/iphoneos/tree_sitter.framework \
-    -framework $TMP_BUILD_DIR/build/maccatalyst/tree_sitter.framework \
-    -framework $TMP_BUILD_DIR/build/iphonesimulator/tree_sitter.framework \
-    -output $SCRIPT_DIR/../tree_sitter.xcframework
+    -framework $TMP_BUILD_DIR/build/macos/$FRAMEWORK_NAME.framework \
+    -framework $TMP_BUILD_DIR/build/iphoneos/$FRAMEWORK_NAME.framework \
+    -framework $TMP_BUILD_DIR/build/maccatalyst/$FRAMEWORK_NAME.framework \
+    -framework $TMP_BUILD_DIR/build/iphonesimulator/$FRAMEWORK_NAME.framework \
+    -output $SCRIPT_DIR/../$FRAMEWORK_NAME.xcframework
 
 rm -rf $TMP_BUILD_DIR

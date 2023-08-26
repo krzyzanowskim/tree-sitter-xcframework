@@ -22,7 +22,7 @@ This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.207.1")
+    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.208.2")
 ]
 ```
 
@@ -31,17 +31,18 @@ dependencies: [
 Accessing the parsers directly:
 
 ```swift
-import tree_sitter
+import TreeSitter
 
 let parser = tree_sitter_swift()
+let parser = tree_sitter_ruby()
 ```
 
-Via the included "LanguageResources" abstraction:
+Via the included "TreeSitterResource" abstraction:
 
 ```swift
-import tree_sitter_language_resources
+import TreeSitterResource
 
-let swift = LanguageResource.swift
+let swift = TreeSitterLanguage.swift
 
 let url = swift.highlightQueryURL
 let parserPtr = swift.parser
@@ -49,4 +50,4 @@ let parserPtr = swift.parser
 
 ### Suggestions or Feedback
 
-I'd love to hear from you! Get in touch via twitter [@krzyzanowskim](https://twitter.com/krzyzanowskim), an issue, or a pull request.
+I'd love to hear from you! Get in touch via twitter [@krzyzanowskim](https://x.com/krzyzanowskim), an issue, or a pull request.

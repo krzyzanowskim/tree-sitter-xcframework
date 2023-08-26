@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 
 import PackageDescription
 
@@ -7,18 +7,18 @@ let package = Package(
     platforms: [.macOS(.v10_13), .iOS(.v11)],
     products: [
         .library(
-            name: "tree_sitter",
-            targets: ["tree_sitter", "tree_sitter_language_resources"]),
+            name: "TreeSitter",
+            targets: ["TreeSitter", "TreeSitterResource"]),
     ],
     dependencies: [],
     targets: [
         .binaryTarget(
-            name: "tree_sitter",
-            path: "tree_sitter.xcframework"
+            name: "TreeSitter",
+            path: "TreeSitter.xcframework"
         ),
         .target(
-            name: "tree_sitter_language_resources",
-            dependencies: ["tree_sitter"],
+            name: "TreeSitterResource",
+            dependencies: ["TreeSitter"],
             resources: [
                 .copy("LanguageResources")
             ],

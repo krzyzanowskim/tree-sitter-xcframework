@@ -1,0 +1,77 @@
+framework module TreeSitter {
+	export parser
+
+	export css
+	export go
+	export gomod
+	export html
+	export java
+	export json
+	export markdown
+	export php
+	export python
+	export ruby
+	export swift
+
+	
+	explicit module parser {
+		header "tree_sitter/api.h"
+		header "tree_sitter/parser.h"
+	}
+		
+	explicit module css {
+		header "css.h"
+		export parser
+	}
+	
+	explicit module go {
+		header "go.h"
+		export parser
+	}
+
+	explicit module gomod {
+		header "gomod.h"
+		export parser
+	}
+
+	explicit module html {
+		header "html.h"
+		export parser
+	}
+
+	explicit module java {
+		header "java.h"
+		export parser
+	}
+
+	explicit module json {
+		header "json.h"
+		export parser
+	}
+
+	explicit module markdown {
+		header "markdown.h"
+		export parser
+	}
+
+	explicit module php {
+		header "php.h"
+		export parser
+	}
+
+	explicit module python {
+		header "python.h"
+		export parser
+	}
+
+	explicit module ruby {
+		header "ruby.h"
+		export parser
+	}
+
+	explicit module swift {
+		header "swift.h"
+		export parser
+	}
+
+}

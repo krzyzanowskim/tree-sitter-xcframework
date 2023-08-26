@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>tree_sitter</string>
 	<key>CFBundleIdentifier</key>
-	<string>best.swift.tree_sitter</string>
+	<string>best.swift.TreeSitter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
