@@ -22,7 +22,7 @@ This is a [work-in-progress](https://github.com/tree-sitter/tree-sitter/issues/1
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.208.2")
+    .package(url: "https://github.com/krzyzanowskim/tree-sitter-xcframework", from: "0.208.4")
 ]
 ```
 

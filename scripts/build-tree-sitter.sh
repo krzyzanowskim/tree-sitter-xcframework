@@ -4,7 +4,7 @@ set -euxo pipefail
 
 BASE_PWD="$PWD"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/tree_sitter_language_resources/LanguageResources"
+LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/TreeSitterResource/LanguageResources"
 
 FRAMEWORK_NAME="TreeSitter"
 
