@@ -8,7 +8,7 @@ LANGUAGE_DATA_DIR="$SCRIPT_DIR/../Sources/TreeSitterResource/LanguageResources"
 
 FRAMEWORK_NAME="TreeSitter"
 
-TMP_BUILD_DIR=$( mktemp -d )
+TMP_BUILD_DIR=$(readlink -f $(mktemp -d))
 mkdir -p $TMP_BUILD_DIR/build/{macos,iphoneos,maccatalyst,iphonesimulator}
 
 IPHONEOS_SYSROOT=$(xcrun --sdk iphoneos --show-sdk-path)
