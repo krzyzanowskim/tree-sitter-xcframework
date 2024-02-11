@@ -124,6 +124,8 @@ build_parser "php"
 git clone --depth 1 https://github.com/ikatyang/tree-sitter-markdown.git
 pushd tree-sitter-markdown
 gh pr checkout 42
+mkdir -p queries
+curl -L https://raw.githubusercontent.com/nvim-treesitter/nvim-treesitter/master/queries/markdown/highlights.scm -o queries/highlights.scm
 popd
 build_parser "markdown"
 
